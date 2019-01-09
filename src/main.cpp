@@ -7,15 +7,6 @@
 
 extern void initScreenQuad(GLFWwindow* _window,int _w, int _h);
 
-// key callback
-void keyCallback(GLFWwindow* _window, int _key, int _scancode, int _action, int _mods){}
-// mouse button press callback
-void mouseButtonCallback(GLFWwindow* _window, int _button, int _action, int _mods){}
-// mouse move callback
-void cursorPosCallback(GLFWwindow* _window, double _xpos, double _ypos){}
-// mouse wheel callback
-void scrollCallback(GLFWwindow* _window, double _xoffset, double _yoffset){}
-
 
 int main(int argc, char **argv)
 {
@@ -31,8 +22,6 @@ int main(int argc, char **argv)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-  //glfwWindowHint( GLFW_DOUBLEBUFFER, GL_FALSE );
- // glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   window = glfwCreateWindow(1024, 720, "Benchmarks", nullptr, nullptr);
   if (!window)
@@ -46,15 +35,6 @@ int main(int argc, char **argv)
   glfwMakeContextCurrent(window);
   glfwSwapInterval(0);
 
-  // set the key callback
-  glfwSetKeyCallback(window, keyCallback);
-  // set mouse callback
-  glfwSetMouseButtonCallback(window, mouseButtonCallback);
-  // mouse cursor move callback
-  glfwSetCursorPosCallback(window, cursorPosCallback);
-  // scroll wheel callback
-  glfwSetScrollCallback(window, scrollCallback);
-
   glfwShowWindow(window);
   glfwPollEvents();
 
@@ -67,11 +47,17 @@ int main(int argc, char **argv)
   shader->loadShader("UBO","shaders/PBRVertex.glsl","shaders/PBRFragment.glsl");
   shader->loadShader("Phong","shaders/PhongVertex.glsl","shaders/PhongFragment.glsl");
   shader->loadShader("ScreenQuad","shaders/ScreenQuadVertex.glsl","shaders/ScreenQuadFragment.glsl");
+
   shader->use("ScreenQuad");
 
   int width, height;
   glfwGetFramebufferSize  (window,&width,&height);
   shader->setUniform("screenResolution",ngl::Vec2(width,height));
+
+  shader->loadShader("ScreenGeo","shaders/ScreenPointVertex.glsl","shaders/ScreenPointFragment.glsl","shaders/ScreenPointGeometry.glsl");
+
+
+
   initScreenQuad(window,width,height);
   std::atexit(glfwTerminate);
   glClearColor(0.8,0.8,0.8,1.0);
