@@ -20,7 +20,8 @@ MOC_DIR=moc
 CONFIG-=app_bundle
 # Auto include all .cpp files in the project src directory (can specifiy individually if required)
 SOURCES+=$$PWD/src/main.cpp \
-         $$PWD/src/UniformBenchmarks.cpp
+         $$PWD/src/UniformBenchmarks.cpp \
+         $$PWD/src/ScreenQuad.cpp
 
 
 # same for the .h files
@@ -31,7 +32,8 @@ INCLUDEPATH +=./include
 # where our exe is going to live (root of project)
 DESTDIR=./
 # add the glsl shader files
-OTHER_FILES+= README.md
+OTHER_FILES+= README.md \
+              shaders/*.glsl
 # were are going to default to a console app
 CONFIG += console
 LIBS += -L/public/devel/lib

@@ -21,6 +21,7 @@ static void LoadShaderUBO(benchmark::State& state)
   {
     shader->setUniformBuffer("TransformUBO",sizeof(transform),&t.MVP.m_00);
   }
+
 }
 
 
@@ -85,8 +86,8 @@ static void LoadShaderUniform(benchmark::State& state)
   }
 }
 
-constexpr int rangeStart=1024;
-constexpr int rangeEnd=1000000; //24
+constexpr int rangeStart=1;
+constexpr int rangeEnd=64; //24
 BENCHMARK(LoadShaderUniform)->Range(rangeStart,rangeEnd);
 BENCHMARK(LoadShaderUBO)->Range(rangeStart,rangeEnd);
 BENCHMARK(LoadShaderUBOBindGL)->Range(rangeStart,rangeEnd);
