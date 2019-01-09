@@ -143,4 +143,5 @@ constexpr int rangeEnd=4; //24
 BENCHMARK(normalScreenQuad)->Range(rangeStart,rangeEnd)->UseManualTime();
 BENCHMARK(normalScreenQuadBound)->Range(rangeStart,rangeEnd)->UseManualTime();
 BENCHMARK(geoScreenQuad)->Range(rangeStart,rangeEnd)->UseManualTime();
+BENCHMARK(geoScreenQuadBound)->Range(rangeStart,rangeEnd)->UseManualTime();
 
