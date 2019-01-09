@@ -19,7 +19,8 @@ MOC_DIR=moc
 # on a mac we don't create a .app bundle file ( for ease of multiplatform use)
 CONFIG-=app_bundle
 # Auto include all .cpp files in the project src directory (can specifiy individually if required)
-SOURCES+=$$PWD/main.cpp
+SOURCES+=$$PWD/src/main.cpp \
+         $$PWD/src/UniformBenchmarks.cpp
 
 
 # same for the .h files
