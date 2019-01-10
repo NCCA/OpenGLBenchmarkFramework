@@ -6,8 +6,10 @@
 #include <benchmark/benchmark.h>
 
 
-extern void initScreenQuad(GLFWwindow* _window,int _w, int _h);
-
+extern void initScreenQuad();
+extern void initVAO();
+GLFWwindow* g_window=nullptr;
+int g_width,g_height;
 
 int main(int argc, char **argv)
 {
@@ -51,15 +53,15 @@ int main(int argc, char **argv)
 
   shader->use("ScreenQuad");
 
-  int width, height;
-  glfwGetFramebufferSize  (window,&width,&height);
-  shader->setUniform("screenResolution",ngl::Vec2(width,height));
+  glfwGetFramebufferSize  (window,&g_width,&g_height);
+  shader->setUniform("screenResolution",ngl::Vec2(g_width,g_height));
 
   shader->loadShader("ScreenGeo","shaders/ScreenPointVertex.glsl","shaders/ScreenPointFragment.glsl","shaders/ScreenPointGeometry.glsl");
 
 
-
-  initScreenQuad(window,width,height);
+  g_window=window;
+  initScreenQuad();
+  initVAO();
   std::atexit(glfwTerminate);
   glClearColor(0.8f,0.8f,0.8f,1.0f);
   glClear(GL_COLOR_BUFFER_BIT);

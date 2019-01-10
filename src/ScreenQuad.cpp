@@ -11,14 +11,11 @@
 std::unique_ptr<ngl::AbstractVAO>  g_screenQuad;
 std::unique_ptr<ngl::AbstractVAO>  g_screenQuadPoint;
 
-GLFWwindow* g_window=nullptr;
+extern GLFWwindow* g_window;
 GLuint g_textureName=0;
-int g_width,g_height;
-void initScreenQuad(GLFWwindow* _window,int _w, int _h)
+extern int g_width,g_height;
+void initScreenQuad()
 {
-  g_window=_window;
-  g_width=_w;
-  g_height=_h;
   g_screenQuad=ngl::VAOFactory::createVAO(ngl::simpleVAO,GL_TRIANGLES);
   g_screenQuad->bind();
 
@@ -83,6 +80,6 @@ static void normalScreenQuadBound(benchmark::State& state)
 }
 
 
-BENCHMARK(normalScreenQuadBound);
-BENCHMARK(geoScreenQuadBound);
+BENCHMARK(normalScreenQuadBound)->Unit(benchmark::kMillisecond);
+BENCHMARK(geoScreenQuadBound)->Unit(benchmark::kMillisecond);
 

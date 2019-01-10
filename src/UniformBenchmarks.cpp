@@ -86,9 +86,7 @@ static void LoadShaderUniform(benchmark::State& state)
   }
 }
 
-constexpr int rangeStart=1;
-constexpr int rangeEnd=64; //24
-BENCHMARK(LoadShaderUniform);//->Range(rangeStart,rangeEnd);
-BENCHMARK(LoadShaderUBO);//->Range(rangeStart,rangeEnd);
-BENCHMARK(LoadShaderUBOBindGL);//->Range(rangeStart,rangeEnd);
-BENCHMARK(LoadShaderUBOBUseNGL);//->Range(rangeStart,rangeEnd);
+BENCHMARK(LoadShaderUniform);
+BENCHMARK(LoadShaderUBO);
+BENCHMARK(LoadShaderUBOBindGL);
+BENCHMARK(LoadShaderUBOBUseNGL);
