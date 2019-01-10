@@ -1,9 +1,10 @@
-#include <benchmark/benchmark.h>
 #include <iostream>
 #include <string>
 #include <ngl/NGLInit.h>
 #include <ngl/ShaderLib.h>
 #include <GLFW/glfw3.h>
+#include <benchmark/benchmark.h>
+
 
 extern void initScreenQuad(GLFWwindow* _window,int _w, int _h);
 
@@ -41,7 +42,7 @@ int main(int argc, char **argv)
 
   // whilst we will do this in a test, best to make sure we have a valid context here
   // incase we run isolated tests on just GL elements
-  ngl::NGLInit::instance()->setCommunicationMode(ngl::CommunicationMode::STDOUT);
+  ngl::NGLInit::instance()->setCommunicationMode(ngl::CommunicationMode::NULLCONSUMER);
   // load shader (not part of BM?)
   auto shader=ngl::ShaderLib::instance();
   shader->loadShader("UBO","shaders/PBRVertex.glsl","shaders/PBRFragment.glsl");
@@ -60,11 +61,9 @@ int main(int argc, char **argv)
 
   initScreenQuad(window,width,height);
   std::atexit(glfwTerminate);
-  glClearColor(0.8,0.8,0.8,1.0);
+  glClearColor(0.8f,0.8f,0.8f,1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
-
 
   ::benchmark::Initialize (&argc, argv);
   ::benchmark::RunSpecifiedBenchmarks ();
-
 }
